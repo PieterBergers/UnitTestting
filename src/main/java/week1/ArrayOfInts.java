@@ -1,6 +1,8 @@
 package week1;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ArrayOfInts {
     public int sumOfInts(int[] arrayOfInts) {
@@ -28,10 +30,28 @@ public class ArrayOfInts {
     }
 
     public int sumOfXLargest(int[] arrayOfInts, int x) {
-        return 0;
+        if (arrayOfInts == null) return 0;
+        if (x < 0) return 0;
+        if (x > arrayOfInts.length) x = arrayOfInts.length;
+        int[] copy = Arrays.copyOf(arrayOfInts, arrayOfInts.length);
+        Arrays.sort(copy);
+        return sumOfInts(Arrays.copyOfRange(copy, arrayOfInts.length-x, arrayOfInts.length));
     }
 
     public int countMostPopularNumber(int[] arrayOfInts) {
-        return 0;
+        if (arrayOfInts == null) return 0;
+
+        Map<Integer, Integer> m = new HashMap<>();
+        int maxCount = 0;
+
+        for (int i : arrayOfInts) {
+            int count = m.getOrDefault(i, 0) + 1;
+            m.put(i, count);
+            if (count > maxCount) {
+                maxCount = count;
+            }
+        }
+
+        return maxCount;
     }
 }
