@@ -7,18 +7,22 @@ import java.util.Map;
 
 public class GroupByNumberOfDigits {
 
-    int[] arrayToSortedArray(int[] numbers) {
+    int[][] arrayToSortedArray(int[] numbers) {
         if (numbers == null)
             throw new IllegalArgumentException("Argument cannot be null.");
 
         Map<Integer, List<Integer>> groupedNumbers = new HashMap<>();
 
         for (int number : numbers) {
-            int lengte = Integer.toString(number).length();
+            int lengte = Integer.toString(Math.abs(number)).length();
             if (!groupedNumbers.containsKey(lengte)) groupedNumbers.put(lengte, new ArrayList<>());
             groupedNumbers.get(lengte).add(number);
         }
 
-        return groupedNumbers.values().stream().flatMap(List::stream).mapToInt(Integer::intValue).sorted().toArray();
+        return groupedNumbers.values().stream().map(list -> {
+                    list.sort(Integer::compareTo);
+                    return list.stream().mapToInt(Integer::intValue).toArray();
+                }).toArray(int[][]::new);
+        //return groupedNumbers.values().stream().flatMap(List::stream).mapToInt(Integer::intValue).sorted().toArray();
     }
 }
