@@ -1,0 +1,24 @@
+package week2;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class ProductTest {
+    Product product = new Product();
+
+    @Test
+    void productDescription_onlyName_returnsName() {
+        assertEquals("• pils", product.productDescription("pils", null, null));
+    }
+}
+
+
+
+//Scenario                     Name_input      size_input      percentage_input       result
+//only name                    pils            null            null                   • pils
+//normal input                 Moore Pils      33              6.3                    • Moore Pils 33CL 6.3%
+//no size                      stella          null            5.2                    • stella 5.2%
+//no percentage                kriek           50              null                   • kriek 50CL
+//0cl input                    biertje         0               null                   IAExc. "size cannot be null."
+//0% input                     alcholvrij bier null            0                      • bier 0.0%
