@@ -3,6 +3,7 @@ package week2;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ProductTest {
     Product product = new Product();
@@ -26,6 +27,21 @@ class ProductTest {
     void productDescription_noPercentage_returnsWithoutPercentage() {
         assertEquals("• kriek 50CL", product.productDescription("kriek", 50, null));
     }
+
+    @Test
+    void productDescription_zeroSize_throwsException() {
+        IllegalArgumentException exception =
+                assertThrows(IllegalArgumentException.class,
+                        () -> product.productDescription("biertje", 0, null));
+
+        assertEquals("Size cannot be null.", exception.getMessage());
+
+    }
+
+    @Test
+    void productDescription_zeroPercentage_returnsZeroPercentage() {
+        assertEquals("• alcholvrij bier 0.0%", product.productDescription("alcholvrij bier", null, 0.0));
+    }
 }
 
 
@@ -35,5 +51,5 @@ class ProductTest {
 //normal input                 Moore Pils      33              6.3                    • Moore Pils 33CL 6.3%
 //no size                      stella          null            5.2                    • stella 5.2%
 //no percentage                kriek           50              null                   • kriek 50CL
-//0cl input                    biertje         0               null                   IAExc. "size cannot be null."
-//0% input                     alcholvrij bier null            0                      • bier 0.0%
+//0cl input                    biertje         0               null                   IAExc. "Size cannot be null."
+//0% input                     alcholvrij bier null            0                      • alcholvrij bier 0.0%
