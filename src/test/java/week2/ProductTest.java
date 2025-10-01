@@ -16,6 +16,16 @@ class ProductTest {
     void productDescription_normalInput_returnsFromattedInput() {
         assertEquals("• Moore Pils 33CL 6.3%", product.productDescription("Moore Pils", 33, 6.3));
     }
+
+    @Test
+    void productDescription_noSize_returnsWithoutSize() {
+        assertEquals("• stella 5.2%", product.productDescription("stella", null, 5.2));
+    }
+
+    @Test
+    void productDescription_noPercentage_returnsWithoutPercentage() {
+        assertEquals("• kriek 50CL", product.productDescription("kriek", 50, null));
+    }
 }
 
 
