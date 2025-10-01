@@ -11,6 +11,11 @@ class ProductTest {
     void productDescription_onlyName_returnsName() {
         assertEquals("• pils", product.productDescription("pils", null, null));
     }
+
+    @Test
+    void productDescription_normalInput_returnsFromattedInput() {
+        assertEquals("• Moore Pils 33CL 6.3%", product.productDescription("Moore Pils", 33, 6.3));
+    }
 }
 
 

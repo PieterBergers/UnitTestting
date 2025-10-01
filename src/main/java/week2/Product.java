@@ -7,7 +7,10 @@ public class Product {
 
 
     public String productDescription(String name, Integer size, Double percentage) {
+        String description = "• "+name;
+        if (size!=null) description += " "+size+"CL";
+        if (percentage!=null) description += " "+percentage+"%";
 
-        return "• "+name;
+        return description;
     }
 }
